@@ -1,49 +1,76 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost&family=Quicksand:wght@300;500;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   font-family: "Jost", sans-serif;
-  font-family: "Quicksand", sans-serif;
 }
 body {
   display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
   background: #6563ff;
+  align-items: center;
+  justify-content: center;
 }
 .wrapper {
   height: 400px;
   width: 400px;
   padding: 25px;
-  background: seashell;
+  background: whitesmoke;
   border-radius: 10px;
 }
 .cards,
 .card,
-.view {
+.view,
+.details {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 .cards {
-  height: 100%;
-  width: 100%;
+  height: 400px;
+  width: 400px;
+  /* height: 100%;
+  width: 100%; */
   flex-wrap: wrap;
   justify-content: space-between;
 }
 .cards .card {
   cursor: pointer;
+  list-style: none;
+  user-select: none;
   position: relative;
-  perspective: 800px;
+  perspective: 1000px;
   transform-style: preserve-3d;
   height: calc(100% / 4 - 10px);
   width: calc(100% / 4 - 10px);
 }
-.cards .card .view {
+.card.shake {
+  animation: shake 0.35s ease-in-out;
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-13px);
+  }
+  40% {
+    transform: translateX(13px);
+  }
+  60% {
+    transform: translateX(-8px);
+  }
+  80% {
+    transform: translateX(8px);
+  }
+}
+.card .view {
   height: 100%;
   width: 100%;
+  pointer-events: none;
   position: absolute;
   background: rgb(255, 255, 255);
   border-radius: 7px;
@@ -59,12 +86,88 @@ body {
   /*with out display ? with it displau img*/
   transform: rotateY(-180deg);
 }
+.card .front-view img {
+  width: 19px;
+}
 .card .back-view img {
   max-width: 45px;
 }
-.card:hover .front-view {
+.card.flip .front-view {
   transform: rotateY(180deg);
 }
-.card:hover .back-view {
+.card.flip .back-view {
   transform: rotateY(0);
+}
+
+/**/
+.details {
+  margin-top: 20px;
+  border-radius: 7px;
+  justify-content: space-between;
+  padding: 25px;
+  border-radius: 10px;
+  background: whitesmoke;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+.details p {
+  font-size: 18px;
+  height: 17px;
+  padding-right: 18px;
+  border-right: 1px solid #ccc;
+}
+.details p span {
+  margin-left: 8px;
+}
+.details .stars {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  margin: 0 5px 0 0;
+}
+.details .stars li {
+  list-style: none;
+  display: inline-block;
+}
+.fa-star {
+  color: #ffd700;
+}
+.details button {
+  cursor: pointer;
+  font-size: 15px;
+  color: #6563ff;
+  border-radius: 20px;
+  padding: 4px 11px;
+  background: #fff;
+  border: 2px solid #6563ff;
+  transition: 0.3s ease;
+}
+.details button:hover {
+  color: #fff;
+  background: #6563ff;
+}
+
+@media screen and (max-width: 700px) {
+  .cards {
+    height: 350px;
+    width: 350px;
+  }
+  .card .front-view img {
+    width: 17px;
+  }
+  .card .back-view img {
+    max-width: 40px;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .cards {
+    height: 300px;
+    width: 300px;
+  }
+  .card .front-view img {
+    width: 15px;
+  }
+  .card .back-view img {
+    max-width: 35px;
+  }
 }
