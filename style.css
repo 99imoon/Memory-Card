@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost&family=Quicksand:wght@300;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Jost", sans-serif;
+  font-family: "Quicksand", sans-serif;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #6563ff;
+}
+.wrapper {
+  height: 400px;
+  width: 400px;
+  padding: 25px;
+  background: seashell;
+  border-radius: 10px;
+}
+.cards,
+.card,
+.view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cards {
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.cards .card {
+  cursor: pointer;
+  position: relative;
+  perspective: 800px;
+  transform-style: preserve-3d;
+  height: calc(100% / 4 - 10px);
+  width: calc(100% / 4 - 10px);
+}
+.cards .card .view {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: rgb(255, 255, 255);
+  border-radius: 7px;
+  backface-visibility: hidden;
+  transition: transform 0.25s linear;
+  box-shadow: 0 5px 10px rgb(0, 0, 0, 0.1);
+}
+.card .front-view span {
+  font-size: 40px;
+  color: #6563ff;
+}
+.card .back-view {
+  /*with out display ? with it displau img*/
+  transform: rotateY(-180deg);
+}
+.card .back-view img {
+  max-width: 45px;
+}
+.card:hover .front-view {
+  transform: rotateY(180deg);
+}
+.card:hover .back-view {
+  transform: rotateY(0);
+}
