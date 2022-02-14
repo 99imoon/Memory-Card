@@ -4,9 +4,9 @@ const cards = document.querySelectorAll(".card"),
   restartBtn = document.querySelector(".details button"),
   stars = document.querySelectorAll(".fa-star");
 
-let maxTime = 60;
+let maxTime = 30;
 let timeLeft = maxTime;
-let moves = 0;
+let movesCounter = 0;
 let matchedCard = 0;
 let disableDeck = false;
 let isPlaying = false;
@@ -25,11 +25,11 @@ function initTimer() {
 function flipCard({ target: clickedCard }) {
   if (!isPlaying) {
     isPlaying = true;
-    timer = setInterval(initTimer, 2000);
+    timer = setInterval(initTimer, 1000);
   }
   if (clickedCard !== cardOne && !disableDeck && timeLeft > 0) {
-    moves++;
-    mivesTag.innerText = moves;
+    movesCounter++;
+    mivesTag.innerText = movesCounter;
     clickedCard.classList.add("flip");
     if (!cardOne) {
       return (cardOne = clickedCard);
@@ -46,7 +46,7 @@ function flipCard({ target: clickedCard }) {
 function matchCards(img1, img2) {
   if (img1 === img2) {
     matchedCard++;
-    if (matchedCard == 8 && timeLeft > 0) {
+    if (matchedCard == 8 && timeLeft > 0 ) {
       return clearInterval(timer);
     }
     cardOne.removeEventListener("click", flipCard);
@@ -67,30 +67,30 @@ function matchCards(img1, img2) {
     disableDeck = false;
   }, 1200);
 
-  //---------------- Stars ---------------
-  if (moves > 8 && moves < 12) {
-    for (i = 0; i < 3; i++) {
-      if (i > 1) {
-        stars[i].style.visibility = "collapse";
-      }
-    }
-  } else if (moves > 13) {
-    for (i = 0; i < 3; i++) {
-      if (i > 0) {
-        stars[i].style.visibility = "collapse";
-      }
-    }
+  removeStars();
+}
+
+//---------------- Stars ---------------
+function removeStars() {
+  if (movesCounter == 8) {
+    stars[2].style.visibility = "collapse";
+  }
+  if (movesCounter == 16) {
+    stars[1].style.visibility = "collapse";
+  }
+  if (movesCounter == 24) {
+    stars[0].style.visibility = "collapse";
   }
 }
 
 //------------ Shuffle Card ------------
 function shuffleCard() {
   timeLeft = maxTime;
-  moves = matchedCard = 0;
+  movesCounter = matchedCard = 0;
   cardOne = cardTwo = "";
   clearInterval(timer);
   timeTag.innerText = timeLeft;
-  mivesTag.innerText = moves;
+  mivesTag.innerText = movesCounter;
   disableDeck = isPlaying = false;
 
   let arr = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
