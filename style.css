@@ -64,7 +64,7 @@ body {
   user-select: none;
   position: relative;
   perspective: 1000px;
-  transform-style: preserve-3d;
+  /* transform-style: preserve-3d; */
   height: calc(100% / 4 - 10px);
   width: calc(100% / 4 - 10px);
 }
@@ -117,7 +117,24 @@ body {
   transform: rotateY(180deg);
 }
 .card.flip .back-view {
+  /* transform: rotateY(0); */
   transform: rotateY(0);
+  background: #02b3e4;
+  cursor: default;
+  animation-name: flipInY;
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+  animation-duration: 0.75s;
+}
+
+.card.match .back-view{
+  cursor: default;
+  background: #e5f720;
+  font-size: 33px;
+  animation-name: rubberBand;
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+  animation-duration: 0.75s;
 }
 
 /*

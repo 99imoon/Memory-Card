@@ -1,16 +1,20 @@
+
+//--------------- Variabels --------------
 const cards = document.querySelectorAll(".card"),
   timeTag = document.querySelector(".time b"),
   mivesTag = document.querySelector(".moves b"),
   restartBtn = document.querySelector(".details button"),
   stars = document.querySelectorAll(".fa-star");
 
-let maxTime = 30;
-let timeLeft = maxTime;
-let movesCounter = 0;
-let matchedCard = 0;
-let disableDeck = false;
-let isPlaying = false;
-let cardOne, cardTwo, timer;
+var maxTime = 30,
+  timeLeft = maxTime,
+  movesCounter = 0,
+  matchedCard = 0,
+  disableDeck = false,
+  isPlaying = false,
+  cardOne,
+  cardTwo,
+  timer;
 
 //---------------- Timer ---------------
 function initTimer() {
@@ -30,7 +34,7 @@ function flipCard({ target: clickedCard }) {
   if (clickedCard !== cardOne && !disableDeck && timeLeft > 0) {
     movesCounter++;
     mivesTag.innerText = movesCounter;
-    clickedCard.classList.add("flip");
+    clickedCard.classList.add("flip","match");
     if (!cardOne) {
       return (cardOne = clickedCard);
     }
@@ -46,7 +50,7 @@ function flipCard({ target: clickedCard }) {
 function matchCards(img1, img2) {
   if (img1 === img2) {
     matchedCard++;
-    if (matchedCard == 8 && timeLeft > 0 ) {
+    if (matchedCard == 8 && timeLeft > 0) {
       return clearInterval(timer);
     }
     cardOne.removeEventListener("click", flipCard);
