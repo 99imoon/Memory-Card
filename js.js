@@ -1,12 +1,12 @@
 const cards = document.querySelectorAll(".card"),
   timeTag = document.querySelector(".time b"),
-  flipsTag = document.querySelector(".flips b"),
-  refreshBtn = document.querySelector(".details button");
-const stars = document.querySelectorAll(".fa-star");
+  mivesTag = document.querySelector(".moves b"),
+  restartBtn = document.querySelector(".details button"),
+  stars = document.querySelectorAll(".fa-star");
 
 let maxTime = 60;
 let timeLeft = maxTime;
-let flips = 0;
+let moves = 0;
 let matchedCard = 0;
 let disableDeck = false;
 let isPlaying = false;
@@ -28,8 +28,8 @@ function flipCard({ target: clickedCard }) {
     timer = setInterval(initTimer, 2000);
   }
   if (clickedCard !== cardOne && !disableDeck && timeLeft > 0) {
-    flips++;
-    flipsTag.innerText = flips;
+    moves++;
+    mivesTag.innerText = moves;
     clickedCard.classList.add("flip");
     if (!cardOne) {
       return (cardOne = clickedCard);
@@ -66,8 +66,8 @@ function matchCards(img1, img2) {
     cardOne = cardTwo = "";
     disableDeck = false;
   }, 1200);
+
   //---------------- Stars ---------------
-  // setting rates based on moves
   if (moves > 8 && moves < 12) {
     for (i = 0; i < 3; i++) {
       if (i > 1) {
@@ -86,11 +86,11 @@ function matchCards(img1, img2) {
 //------------ Shuffle Card ------------
 function shuffleCard() {
   timeLeft = maxTime;
-  flips = matchedCard = 0;
+  moves = matchedCard = 0;
   cardOne = cardTwo = "";
   clearInterval(timer);
   timeTag.innerText = timeLeft;
-  flipsTag.innerText = flips;
+  mivesTag.innerText = moves;
   disableDeck = isPlaying = false;
 
   let arr = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -111,7 +111,7 @@ function shuffleCard() {
 }
 shuffleCard();
 
-refreshBtn.addEventListener("click", shuffleCard);
+restartBtn.addEventListener("click", shuffleCard);
 
 cards.forEach((card) => {
   card.addEventListener("click", flipCard);
