@@ -13,7 +13,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 /*
 ** Title
 */
@@ -189,6 +188,15 @@ body {
 .moves,
 .time {
   color: #93278f;
+}
+
+/*
+* Background
+*/
+.background img{
+  width: 100px;
+  height: 100px;
+  filter: drop-shadow(1px -1px 4px rgb(204, 204, 204));
 }
 /*
 *Media
